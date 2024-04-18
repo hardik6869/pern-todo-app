@@ -1,5 +1,11 @@
+import InputTodo from "./components/InputTodo";
+
 function App() {
-  return <h1>PERN Todo App</h1>;
+  return (
+    <div className="container">
+      <InputTodo />
+    </div>
+  );
 }
 
 export default App;
