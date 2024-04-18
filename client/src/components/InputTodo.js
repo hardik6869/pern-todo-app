@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import axios from "axios";
+import { setupTodo } from "../utils/apiPaths";
 
 const InputTodo = () => {
   const [description, setDescription] = useState("");
@@ -7,7 +8,7 @@ const InputTodo = () => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/todos", {
+      const response = await axios.post(setupTodo, {
         description,
       });
 
