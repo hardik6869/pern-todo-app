@@ -3,13 +3,24 @@ import { setupTodo } from "../utils/apiPaths";
 import axios from "axios";
 
 const ListTodos = () => {
-  const [todoList, setTodoList] = useState([]);
+  const [todosList, setTodosList] = useState([]);
 
   const getTodos = async () => {
     try {
       const response = await axios.get(setupTodo);
       if (response.status === 200) {
-        setTodoList(response.data);
+        setTodosList(response.data);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  const handleDeleteTodo = async (todoId) => {
+    try {
+      const response = await axios.delete(`${setupTodo}/${todoId}`);
+      if (response.status === 200) {
+        setTodosList(todosList.filter((todo) => todo.todo_id !== todoId));
       }
     } catch (error) {
       console.error(error.message);
@@ -31,14 +42,19 @@ const ListTodos = () => {
           </tr>
         </thead>
         <tbody>
-          {todoList.map((item) => (
-            <tr key={item.todo_id}>
-              <td>{item.description}</td>
+          {todosList.map((todo) => (
+            <tr key={todo.todo_id}>
+              <td>{todo.description}</td>
               <td>
                 <button className="btn btn-success">Edit</button>
               </td>
               <td>
-                <button className="btn btn-danger">Delete</button>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => handleDeleteTodo(todo.todo_id)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
