@@ -14,6 +14,7 @@ const InputTodo = () => {
 
       if (response.status === 200) {
         setDescription("");
+        window.location = "/";
       }
     } catch (error) {
       console.error(error.message);
@@ -29,6 +30,8 @@ const InputTodo = () => {
           className="form-control"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          minLength={2}
+          required
         />
         <button type="submit" className="btn btn-success">
           Add

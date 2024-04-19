@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { setupTodo } from "../utils/apiPaths";
 import axios from "axios";
+import EditTodo from "./EditTodo";
 
 const ListTodos = () => {
   const [todosList, setTodosList] = useState([]);
@@ -46,7 +47,7 @@ const ListTodos = () => {
             <tr key={todo.todo_id}>
               <td>{todo.description}</td>
               <td>
-                <button className="btn btn-success">Edit</button>
+                <EditTodo todo={todo} />
               </td>
               <td>
                 <button
